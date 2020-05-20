@@ -47,5 +47,10 @@ with open(argv[1], newline='') as peoplefile:
     people = DictReader(peoplefile)
     for person in people:
         match = 0
-        
+        for dna in sequences:
+            if sequences[dna] == int(person[dna]):
+                match += 1
+        if match == len(sequences):
+            print(person['name'])
+            exit()
     print("No match")
