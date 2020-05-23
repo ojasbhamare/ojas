@@ -38,9 +38,9 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
             int g = image[i][j].rgbtGreen;
             int b = image[i][j].rgbtBlue;
 
-            int ansr = 0.393 * r + .769 * g + .189 * b;
-            int ansg = 0.349 * r + .686 * g + .168 * b;
-            int ansb = 0.272 * r + .534 * g + .131 * b;
+            float ansr = 0.393 * r + .769 * g + .189 * b;
+            float ansg = 0.349 * r + .686 * g + .168 * b;
+            float ansb = 0.272 * r + .534 * g + .131 * b;
 
             if (ansr > 255)
             {
