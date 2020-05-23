@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cs50.h>
+#include <stdint.h>
+
+
+typedef uint8_t BYTE;
 
 int main(int argc, char *argv[])
 {
@@ -21,11 +25,11 @@ int main(int argc, char *argv[])
 
     for (int i = 0;true ; i++)
     {
-        char full[512];
-        fread(full,1, 512, file);
-        /*if (fread(full, 1, 512, file) < 512)
+        BYTE buffer[512];
+        fread(buffer, sizeof(BYTE), 512, file);
+        /*if (fread(buffer, 1, 512, file) < 512)
         {
-            fwrite(img, 1, 512, full);
+            fwrite(img, 1, 512, buffer);
             break;
         }*/
 
@@ -35,31 +39,30 @@ int main(int argc, char *argv[])
         FILE *img = NULL;
 
         bool first = true;
-        if (full[0] == (char) 0xff && full[1] == (char) 0xd8 && full[2] == (char)0xff && (full[3] & 0xf0) == 0xe0)
+        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
             if (first)
             {
                 sprintf(name, "%03i.jpg", num);
                 img = fopen(name, "w");
 
-                fwrite(full, 1, 512, img);
+                fwrite(buffer, sizeof(BYTE), 512, img);
                 first = false;
             }
 
             else
             {
-
                 fclose(img);
                 num += 1;
                 sprintf(name, "%03i.jpg", num);
                 img = fopen(name, "w");
 
-                fwrite(full,1, 512, img);
+                fwrite(buffer,sizeof(BYTE), 512, img);
             }
         }
         else
         {
-            fwrite(full,1, 512, img);
+            fwrite(buffer,sizeof(BYTE), 512, img);
         }
 
     }
