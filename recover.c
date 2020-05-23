@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
         if (fread(buffer, sizeof(BYTE), 512, file) < 512)
         {
             fwrite(buffer, sizeof(BYTE), 512,img);
+            fclose(img);
+            return 0;
             break;
         }
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
