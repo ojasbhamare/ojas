@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
                 sprintf(name, "%03i.jpg", num);
                 img = fopen(name, "w");
 
-                fwrite(buffer,sizeof(BYTE), 512, img);
+                fwrite(buffer, sizeof(BYTE), 512, img);
             }
         }
         else
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            fwrite(buffer,sizeof(BYTE), 512, img);
+            fwrite(buffer, sizeof(BYTE), 512, img);
         }
 
     }
