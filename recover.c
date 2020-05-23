@@ -21,24 +21,18 @@ int main(int argc, char *argv[])
         printf("Cannot open the file.\n");
         return 1;
     }
-
-
-    for (int i = 0;true ; i++)
+    int num = 0;
+    char name[8];
+    FILE *img = NULL;
+    bool first = true;
+    while (true)
     {
         BYTE buffer[512];
-        fread(buffer, sizeof(BYTE), 512, file);
-        /*if (fread(buffer, 1, 512, file) < 512)
+        if (fread(buffer, sizeof(BYTE), 512, file) < 512)
         {
-            fwrite(img, 1, 512, buffer);
+            fwrite(buffer, sizeof(BYTE), 512,img);
             break;
-        }*/
-
-        int num = 0;
-        string name = "dcmoskcodcfdsvsdkc";
-
-        FILE *img = NULL;
-
-        bool first = true;
+        }
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
             if (first)
@@ -62,6 +56,11 @@ int main(int argc, char *argv[])
         }
         else
         {
+            if (img == NULL)
+            {
+                continue;
+            }
+
             fwrite(buffer,sizeof(BYTE), 512, img);
         }
 
