@@ -6,12 +6,12 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int i = 0; i < height; i++)
     {
-        for(int j = 0; j < width; j++)
+        for (int j = 0; j < width; j++)
         {
             int r = image[i][j].rgbtRed;
             int g = image[i][j].rgbtGreen;
             int b = image[i][j].rgbtBlue;
-            float ans1 = (r + g + b)/3.0;
+            float ans1 = (r + g + b) / 3.0;
             int ans = round(ans1);
             image[i][j].rgbtRed = ans;
             image[i][j].rgbtGreen = ans;
@@ -25,11 +25,6 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
-    /*  sepiaRed = .393 * originalRed + .769 * originalGreen + .189 * originalBlue
-  sepiaGreen = .349 * originalRed + .686 * originalGreen + .168 * originalBlue
-  sepiaBlue = .272 * originalRed + .534 * originalGreen + .131 * originalBlue*/
-
-
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -73,7 +68,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 
     for (int i = 0; i < height; i++)
     {
-        for(int j = 0; j < width; j++)
+        for (int j = 0; j < width; j++)
         {
             ans[i][j] = image[i][j];
         }
@@ -81,7 +76,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 
     for (int i = 0; i < height; i++)
     {
-        for(int j = 0; j < width; j++)
+        for (int j = 0; j < width; j++)
         {
             int b = width - j - 1;
             image[i][j] = ans[i][b];
@@ -97,7 +92,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
     for (int i = 0; i < height; i++)
     {
-        for(int j = 0; j < width; j++)
+        for (int j = 0; j < width; j++)
         {
             ans[i][j] = image[i][j];
         }
@@ -105,7 +100,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
     for (int i = 0; i < height; i++)
     {
-        for(int j = 0; j < width; j++)
+        for (int j = 0; j < width; j++)
         {
             int sumr = 0;
             int sumg = 0;
@@ -113,7 +108,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             float count = 0.00;
             for (int h = i - 1; h <= i + 1; h++)
             {
-                for(int k = j - 1; k <= j + 1; k++)
+                for (int k = j - 1; k <= j + 1; k++)
                 {
                     if (h >= 0 && k >= 0 && h < height && k < width)
                     {
