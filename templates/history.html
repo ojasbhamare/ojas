@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">Transacted</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {% for ss in symbol_shares %}
+      {% set sym = ss["symbol"] %}
+
+      <tr>
+        <td scope="row">{{ sym }}</td>
+        <td>{{ ss["shares"]}}</td>
+        <td>{{ ss["price"] | usd}}</td>
+        <td>{{ ss["transacted"] }} </td>
+      </tr>
+
+      {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Finance
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% set a = namespace(sum=available)  %}
+
+      {% for ss in symbol_shares %}
+      {% set sym = ss["symbol"] %}
+      {% set tot_indv = ss["SUM(shares)"] * name_prices[sym]["price"]  %}
+      {% set a.sum = a.sum + tot_indv %}
+
+      <tr>
+        <td scope="row">{{ sym }}</td>
+        <td>{{ name_prices[sym]["name"] }}</td>
+        <td>{{ ss["SUM(shares)" ]}}</td>
+        <td>{{ name_prices[sym]["price"] | usd}}</td>
+        <td>{{ tot_indv | usd}} </td>
+      </tr>
+
+      {% endfor %}
+
+    <tr>
+      <th scope="row">CASH</th>
+      <td colspan="3"></td>
+      <td>{{ available | usd }}</td>
+    </tr>
+
+    <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <th>{{ a.sum | usd }}</th>
+            </tr>
+        </tfoot>
+
+  </tbody>
+</table>
+{% endblock %}
